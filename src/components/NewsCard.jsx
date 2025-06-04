@@ -1,25 +1,17 @@
 import React from 'react';
 
-const sentimentColor = {
-  Positive: 'bg-green-500',
-  Neutral: 'bg-gray-400',
-  Negative: 'bg-red-500'
-};
-
 const NewsCard = ({ title, summary, sentiment, time }) => {
   return (
-    <div className="p-4 rounded-xl shadow-md bg-white flex flex-col justify-between h-full">
+    <div className="p-4 rounded-xl shadow border bg-white flex flex-col justify-between h-full hover:shadow-md transition">
       <div>
-        <h2 className="font-bold text-lg mb-2">{title}</h2>
-        <p className="text-sm text-gray-700 mb-4">{summary}</p>
+        <h2 className="font-semibold text-lg mb-2 text-gray-800">{title}</h2>
+        <p className="text-sm text-gray-600">{summary}</p>
       </div>
-      <div className="flex justify-between items-center mt-auto">
-        <button className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm">AI Summary</button>
-        <span className={`text-white text-sm px-2 py-1 rounded-full ${sentimentColor[sentiment]}`}>
-          {sentiment}
-        </span>
+      
+      <div className="flex justify-between items-center mt-4">
+        <button className="text-sm text-blue-600 hover:underline">AI Summary</button>
+        <span className="text-xs text-gray-400">{time}</span>
       </div>
-      <div className="text-xs text-gray-500 mt-2">News Source – {time}</div>
     </div>
   );
 };
