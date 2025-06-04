@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import CategoryBar from './components/CategoryBar';
 import NewsFeed from './components/NewsFeed';
+import NewsPage from './components/NewsPage';
 import { NewsProvider } from './context/NewsContext';
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
         <Navbar />
         <CategoryBar />
         <NewsFeed />
+        <NewsPage />
       </div>
     </NewsProvider>
   );
