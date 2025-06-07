@@ -3,6 +3,7 @@ import { LockClosedIcon } from '@heroicons/react/solid';
 import { useAuthStore } from '../store/useAuthStore.js';
 import { Link } from 'react-router-dom'; 
 // same yahan bhi useAuthStore ko replace kar dena harsh
+//bhai ye folders alg hone k wajah se problem aa rha tha isiliye tere wale code pe hi chor rha hu
 
 const Login = () => {
   const [email, setEmail] = useState('');
