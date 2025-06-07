@@ -1,47 +1,57 @@
 import React from 'react';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
+  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
-  const username = "Ishaan Sammi";
+  const isLoggedIn = false; // Change to false to see Login/Signup state
+  const user = { name: "Ishaan", avatar: "https://avatar.vercel.sh/ishaan" };
 
   return (
-    <nav className="bg-white border-b px-6 py-4 flex justify-between items-center shadow-sm">
-      <div className="font-semibold text-xl text-gray-800">Infinite Feed</div>
+    <nav className="bg-white shadow-md px-6 py-3 flex items-center justify-between">
+      {/* Logo */}
+      <div className="text-2xl font-bold text-violet-600">Newsify</div>
 
-      <div className="flex items-center space-x-6 text-sm text-gray-700">
-        <a href="#" className="hover:text-black">Home</a>
-        <a href="#" className="hover:text-black">Categories</a>
-        <a href="#" className="hover:text-black">Saved</a>
+      {/* Nav Buttons */}
+      <div className="hidden md:flex gap-6 text-gray-600 font-medium">
+        <button className="hover:text-violet-600 transition cursor-pointer">Home</button>
+        <button className="hover:text-violet-600 transition cursor-pointer">Explore</button>
+        <button className="hover:text-violet-600 transition cursor-pointer">Create</button>
+        <button className="hover:text-violet-600 transition cursor-pointer">My Posts</button>
+      </div>
 
-       
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="cursor-pointer">
-              <AvatarImage src="https://avatar.vercel.sh/ishaan" alt={username} />
-              <AvatarFallback>{username[0]}</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent align="end" className="bg-white border shadow-md rounded-md p-1 w-48">
-            <DropdownMenuLabel className="font-semibold text-gray-900 px-2 py-1">
-              {username}
-            </DropdownMenuLabel>
-            <DropdownMenuItem>View Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem className="text-red-500">Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      {/* Right Section */}
+      <div className="flex items-center gap-4">
+        {isLoggedIn ? (
+          <>
+            <span className="text-gray-700 font-medium hidden sm:inline">Hi, {user.name}</span>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback>{user.name[0]}</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-white border shadow-md rounded-md p-1">
+                <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">Settings</DropdownMenuItem>
+                <DropdownMenuItem className="text-red-500 cursor-pointer">Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        ) : (
+          <>
+            <Button className="bg-violet-500 hover:bg-violet-600 text-white">Login</Button>
+            <Button variant="outline" className="border-violet-500 text-violet-500 hover:bg-violet-50">
+              Signup
+            </Button>
+          </>
+        )}
       </div>
     </nav>
   );

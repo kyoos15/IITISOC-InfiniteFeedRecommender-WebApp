@@ -199,9 +199,25 @@ const NewsPage = () => {
                   )}
 
                   {comment.replies.length > 0 && (
-                    <div className="mt-3 space-y-2 ml-4 border-l pl-4">
+                    <div className="mt-3 space-y-3 ml-4 border-l pl-4">
                       {comment.replies.map(reply => (
-                        <p key={reply.id} className="text-sm text-gray-700">{reply.text}</p>
+                        <div key={reply.id} className="flex items-start space-x-3">
+                          <Avatar className="mt-1">
+                            <AvatarImage src={`https://avatar.vercel.sh/r${reply.id}`} alt="Reply User" />
+                            <AvatarFallback>R</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 bg-gray-100 p-3 rounded-lg">
+                            <div className="flex justify-between items-center mb-1">
+                              <span className="font-semibold text-gray-900 text-sm">User {reply.id % 100}</span>
+                              <span className="text-xs text-gray-500">
+                                {new Date(reply.id).toLocaleDateString(undefined, {
+                                  month: 'short', day: 'numeric', year: 'numeric'
+                                })}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-800">{reply.text}</p>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   )}
