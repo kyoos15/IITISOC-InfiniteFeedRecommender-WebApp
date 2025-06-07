@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UserAddIcon } from '@heroicons/react/solid';
-import { useAuthStore } from '../store/useAuthStore';
+import { useAuthStore } from '../context/AuthContext'; 
 // useAuthStore ko replace kar dena harsh 
 
 const Signup = () => {
