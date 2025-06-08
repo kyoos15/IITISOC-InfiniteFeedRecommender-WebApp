@@ -74,14 +74,14 @@ const Navbar = () => {
         ) : (
           <>
             <Button
-              className="bg-violet-500 hover:bg-violet-600 text-white"
+              className="bg-violet-500 hover:bg-violet-600 text-white cursor-pointer"
               onClick={() => navigate("/login")}
             >
               Login
             </Button>
             <Button
               variant="outline"
-              className="border-violet-500 text-violet-500 hover:bg-violet-50"
+              className="border-violet-500 text-violet-500 hover:bg-violet-50 cursor-pointer"
               onClick={() => navigate("/signup")}
             >
               Signup
