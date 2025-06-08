@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -8,40 +8,49 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const isLoggedIn = false; // Change to true to see logged in state
+  const [menuOpen, setMenuOpen] = useState(false);
+  const isLoggedIn = false; // Change to true to simulate logged-in state
   const user = { name: "Ishaan", avatar: "https://avatar.vercel.sh/ishaan" };
 
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Explore", path: "/explore" },
+    { name: "Create", path: "/create" },
+    { name: "My Posts", path: "/myposts" },
+  ];
+
   return (
-    <nav className="bg-white shadow-md px-6 py-3 flex items-center justify-between">
+    <nav className="bg-white shadow-md px-6 py-3 flex items-center justify-between relative">
       {/* Logo */}
-      <div className="text-2xl font-bold text-violet-600 cursor-pointer" onClick={() => navigate("/")}>
+      <div
+        className="text-2xl font-bold text-violet-600 cursor-pointer"
+        onClick={() => navigate("/")}
+      >
         Newsify
       </div>
 
-      {/* Nav Buttons */}
+      {/* Desktop Nav */}
       <div className="hidden md:flex gap-6 text-gray-600 font-medium">
-        <button className="hover:text-violet-600 transition cursor-pointer" onClick={() => navigate("/")}>
-          Home
-        </button>
-        <button className="hover:text-violet-600 transition cursor-pointer" onClick={() => navigate("/explore")}>
-          Explore
-        </button>
-        <button className="hover:text-violet-600 transition cursor-pointer" onClick={() => navigate("/create")}>
-          Create
-        </button>
-        <button className="hover:text-violet-600 transition cursor-pointer" onClick={() => navigate("/myposts")}>
-          My Posts
-        </button>
+        {navLinks.map((link) => (
+          <button
+            key={link.name}
+            className="hover:text-violet-600 transition cursor-pointer"
+            onClick={() => navigate(link.path)}
+          >
+            {link.name}
+          </button>
+        ))}
       </div>
 
-      {/* Right Section */}
-      <div className="flex items-center gap-4">
+      {/* Right side */}
+      <div className="hidden md:flex items-center gap-4">
         {isLoggedIn ? (
           <>
-            <span className="text-gray-700 font-medium hidden sm:inline">Hi, {user.name}</span>
+            <span className="text-gray-700 font-medium">Hi, {user.name}</span>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="cursor-pointer">
@@ -50,16 +59,13 @@ const Navbar = () => {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-white border shadow-md rounded-md p-1">
-                <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/profile")}>
+                <DropdownMenuItem onClick={() => navigate("/profile")}>
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/settings")}>
+                <DropdownMenuItem onClick={() => navigate("/settings")}>
                   Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-red-500 cursor-pointer" onClick={() => {
-                  // add your logout logic here
-                  alert("Logging out...");
-                }}>
+                <DropdownMenuItem className="text-red-500" onClick={() => alert("Logging out...")}>
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -68,14 +74,14 @@ const Navbar = () => {
         ) : (
           <>
             <Button
-              className="bg-violet-500 hover:bg-violet-600 text-white cursor-pointer"
+              className="bg-violet-500 hover:bg-violet-600 text-white"
               onClick={() => navigate("/login")}
             >
               Login
             </Button>
             <Button
               variant="outline"
-              className="border-violet-500 text-violet-500 hover:bg-violet-50 cursor-pointer"
+              className="border-violet-500 text-violet-500 hover:bg-violet-50"
               onClick={() => navigate("/signup")}
             >
               Signup
@@ -83,6 +89,61 @@ const Navbar = () => {
           </>
         )}
       </div>
+
+      {/* Hamburger menu - Mobile only */}
+      <div className="md:hidden">
+        <Button variant="ghost" size="icon" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </Button>
+      </div>
+
+      {/* Mobile dropdown menu */}
+      {menuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md flex flex-col p-4 z-50 gap-3">
+          {navLinks.map((link) => (
+            <button
+              key={link.name}
+              className="text-gray-700 text-left px-2 py-1 hover:bg-violet-50 rounded-md"
+              onClick={() => {
+                navigate(link.path);
+                setMenuOpen(false);
+              }}
+            >
+              {link.name}
+            </button>
+          ))}
+          {isLoggedIn ? (
+            <>
+              <hr />
+              <button onClick={() => navigate("/profile")} className="text-left px-2 py-1">
+                Profile
+              </button>
+              <button onClick={() => navigate("/settings")} className="text-left px-2 py-1">
+                Settings
+              </button>
+              <button
+                onClick={() => {
+                  alert("Logging out...");
+                  setMenuOpen(false);
+                }}
+                className="text-left px-2 py-1 text-red-500"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <hr />
+              <Button variant="ghost" onClick={() => { navigate("/login"); setMenuOpen(false); }}>
+                Login
+              </Button>
+              <Button variant="outline" onClick={() => { navigate("/signup"); setMenuOpen(false); }}>
+                Signup
+              </Button>
+            </>
+          )}
+        </div>
+      )}
     </nav>
   );
 };
