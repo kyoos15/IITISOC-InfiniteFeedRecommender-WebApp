@@ -10,21 +10,21 @@ export const NewsProvider = ({ children }) => {
     const localNews = [
             {
     title: 'RCB wins IPL 2025 trophy',
-    summary: 'virat lifts his maiden trophy',
+    summary: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio totam sint, quod accusamus eos doloribus necessitatibus eum in nulla, fugiat animi itaque voluptatem blanditiis sapiente porro quaerat amet nostrum a! Accusantium numquam repellendus sunt excepturi esse deleniti soluta nam dolorem perferendis in voluptatibus harum porro aut, provident laborum iste fugiat non vitae magnam quidem voluptate molestias quis? Repellendus voluptas ut corrupti expedita minima non at repellat qui porro commodi natus enim placeat hic perferendis dignissimos, reprehenderit alias in neque corporis totam? Cupiditate aliquam mollitia, aperiam, animi deserunt possimus quas fuga, veniam voluptatum accusantium repellendus culpa! Distinctio iure numquam unde id?',
     sentiment: 'Positive',
     category: 'sports',
     time: '2h ago'
   },
       {
     title: 'Economic Growth Continues as Markets Reach New Highs',
-    summary: 'The stock market reached new record highs today, driven by strong economic growth.',
+    summary: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio totam sint, quod accusamus eos doloribus necessitatibus eum in nulla, fugiat animi itaque voluptatem blanditiis sapiente porro quaerat amet nostrum a! Accusantium numquam repellendus sunt excepturi esse deleniti soluta nam dolorem perferendis in voluptatibus harum porro aut, provident laborum iste fugiat non vitae magnam quidem voluptate molestias quis? Repellendus voluptas ut corrupti expedita minima non at repellat qui porro commodi natus enim placeat hic perferendis dignissimos, reprehenderit alias in neque corporis totam? Cupiditate aliquam mollitia, aperiam, animi deserunt possimus quas fuga, veniam voluptatum accusantium repellendus culpa! Distinctio iure numquam unde id?',
     sentiment: 'Positive',
     category: 'Economy',
     time: '2h ago'
   },
   {
     title: 'Local Team Claims Victory in Championship Game',
-    summary: 'The local sports team won the championship game last night in a thrilling match.',
+    summary: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio totam sint, quod accusamus eos doloribus necessitatibus eum in nulla, fugiat animi itaque voluptatem blanditiis sapiente porro quaerat amet nostrum a! Accusantium numquam repellendus sunt excepturi esse deleniti soluta nam dolorem perferendis in voluptatibus harum porro aut, provident laborum iste fugiat non vitae magnam quidem voluptate molestias quis? Repellendus voluptas ut corrupti expedita minima non at repellat qui porro commodi natus enim placeat hic perferendis dignissimos, reprehenderit alias in neque corporis totam? Cupiditate aliquam mollitia, aperiam, animi deserunt possimus quas fuga, veniam voluptatum accusantium repellendus culpa! Distinctio iure numquam unde id?',
     sentiment: 'Positive',
     category: 'Sports',
     time: '3h ago'
@@ -49,6 +49,27 @@ export const NewsProvider = ({ children }) => {
     sentiment: 'Negative',
     category: 'World',
     time: '2h ago'
+  },
+  {
+    title: 'New Health Guidelines Released by Experts',
+    summary: 'Health experts released new guidelines for improving public health.',
+    sentiment: 'Neutral',
+    category: 'India',
+    time: '3h ago'
+  },
+  {
+    title: 'New Health Guidelines Released by Experts',
+    summary: 'Health experts released new guidelines for improving public health.',
+    sentiment: 'Neutral',
+    category: 'India',
+    time: '3h ago'
+  },
+  {
+    title: 'New Health Guidelines Released by Experts',
+    summary: 'Health experts released new guidelines for improving public health.',
+    sentiment: 'Neutral',
+    category: 'India',
+    time: '3h ago'
   },
   {
     title: 'New Health Guidelines Released by Experts',
