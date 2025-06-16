@@ -8,7 +8,11 @@ import Signup from './pages/Signup';
 import { NewsProvider } from './context/NewsContext';
 import { AuthProvider } from "./context/AuthContext";
 
+// one ceo(user) id: 68500ea2123c069e03977f30
+// one channel id: 68500ebb123c069e03977f35
+
 const App = () => {
+    
   return (
     <AuthProvider>
     <NewsProvider>
