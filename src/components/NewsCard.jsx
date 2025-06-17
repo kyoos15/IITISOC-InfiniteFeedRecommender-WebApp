@@ -20,7 +20,7 @@ const getBackgroundColor = (sentiment) => {
   }
 };
 
-const NewsCard = ({ title, summary, time, channel, sentiment, category }) => {
+const NewsCard = ({ title, description, time, channel, sentiment, category }) => {
   return (
     <div className={`rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full ${getBackgroundColor(sentiment)}`}>
 
@@ -48,7 +48,7 @@ const NewsCard = ({ title, summary, time, channel, sentiment, category }) => {
       {/* News Content */}
       <div className="flex flex-col gap-2">
         <h2 className="text-base md:text-lg font-semibold text-gray-800 line-clamp-2">{title}</h2>
-        <p className="text-sm md:text-[15px] text-gray-700 leading-snug line-clamp-4">{summary}</p>
+        <p className="text-sm md:text-[15px] text-gray-700 leading-snug line-clamp-4">{description}</p>
       </div>
 
       {/* Footer */}

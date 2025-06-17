@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 // one ceo(user) id: 68500ea2123c069e03977f30
 // one channel id: 68500ebb123c069e03977f35
+// one asset id: 6850477ddcf9a0821c1b6c24
 
 const App = () => {
     
