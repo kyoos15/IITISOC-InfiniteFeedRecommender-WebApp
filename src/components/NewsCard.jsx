@@ -1,29 +1,32 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   AvatarImage,
   AvatarFallback
 } from "@/components/ui/avatar";
 
-// Background color based on sentiment
 const getBackgroundColor = (sentiment) => {
   switch (sentiment?.toLowerCase()) {
     case 'positive':
       return 'bg-green-50';
     case 'negative':
       return 'bg-red-50';
-
-      case 'neutral':
+    case 'neutral':
       return 'bg-yellow-50';
     default:
       return 'bg-white';
   }
 };
 
-const NewsCard = ({ title, description, time, channel, sentiment, category }) => {
-  return (
-    <div className={`rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full ${getBackgroundColor(sentiment)}`}>
+const NewsCard = ({ id, title, description, time, channel, sentiment, category }) => {
+  const navigate = useNavigate();
 
+  return (
+    <div
+      onClick={() => navigate(`/news/${id}`)}
+      className={`rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full ${getBackgroundColor(sentiment)}`}
+    >
       {/* Header: Avatar + Author */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -36,7 +39,7 @@ const NewsCard = ({ title, description, time, channel, sentiment, category }) =>
             <p className="text-xs text-gray-500">@{channel?.name?.replace(/\s+/g, '').toLowerCase()}</p>
           </div>
         </div>
-        
+
         {/* Category Tag */}
         {category && (
           <span className="text-xs bg-blue-300 text-gray-600 px-3 py-1 rounded-full font-medium">

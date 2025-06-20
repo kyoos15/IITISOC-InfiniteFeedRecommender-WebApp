@@ -9,12 +9,14 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Menu, X } from "lucide-react";
+import { useAuthStore } from '../context/AuthContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isLoggedIn = false; // Change to true to simulate logged-in state
-  const user = { name: "Ishaan", avatar: "https://avatar.vercel.sh/ishaan" };
+
+  const { user, logout } = useAuthStore(); // ✅ Get user and logout from context
+  const isLoggedIn = !!user;
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -46,7 +48,7 @@ const Navbar = () => {
         ))}
       </div>
 
-      {/* Right side */}
+      {/* Right Side */}
       <div className="hidden md:flex items-center gap-4">
         {isLoggedIn ? (
           <>
@@ -54,7 +56,7 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="cursor-pointer">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src={user.avatar || `https://avatar.vercel.sh/${user.name}`} alt={user.name} />
                   <AvatarFallback>{user.name[0]}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
@@ -65,7 +67,13 @@ const Navbar = () => {
                 <DropdownMenuItem onClick={() => navigate("/settings")}>
                   Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-red-500" onClick={() => alert("Logging out...")}>
+                <DropdownMenuItem
+                  className="text-red-500"
+                  onClick={() => {
+                    logout();
+                    navigate("/login");
+                  }}
+                >
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -90,14 +98,14 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Hamburger menu - Mobile only */}
+      {/* Hamburger - Mobile Only */}
       <div className="md:hidden">
         <Button variant="ghost" size="icon" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </Button>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile Dropdown */}
       {menuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md flex flex-col p-4 z-50 gap-3">
           {navLinks.map((link) => (
@@ -123,7 +131,8 @@ const Navbar = () => {
               </button>
               <button
                 onClick={() => {
-                  alert("Logging out...");
+                  logout();
+                  navigate("/login");
                   setMenuOpen(false);
                 }}
                 className="text-left px-2 py-1 text-red-500"
