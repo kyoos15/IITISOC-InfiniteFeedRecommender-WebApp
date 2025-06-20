@@ -18,37 +18,47 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-12 px-6 py-8 bg-emerald-100 border rounded-lg shadow-sm space-y-6 items-center">
-      <h1 className="text-3xl font-semibold text-red-500 ">Create New Post</h1>
+    <div className="max-w-3xl mx-auto mt-14 px-6 py-10 bg-white border border-gray-200 rounded-2xl shadow-md">
+      <h1 className="text-4xl font-bold text-center text-emerald-600 mb-10">
+         Write a New Post
+      </h1>
 
-      <div>
-        <label className="block text-gray-700  text-2xl  mb-1">Title</label>
-        <Input
-          type="text"
-          placeholder="Enter the post title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="text-base px-4 py-3"
-        />
+      <div className="space-y-6">
+        <div>
+          <label className="block text-lg font-medium text-gray-700 mb-2">
+            Title
+          </label>
+          <Input
+            type="text"
+            placeholder="e.g., How to stay productive while coding"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full text-base px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-400 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label className="block text-lg font-medium text-gray-700 mb-2">
+            Content
+          </label>
+          <Textarea
+            placeholder="Write your article here..."
+            rows={16}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="w-full text-base px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-400 focus:outline-none resize-none"
+          />
+        </div>
+
+        <div className="text-center">
+          <Button
+            onClick={handlePublish}
+            className="bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300 text-white px-8 py-3 text-lg font-semibold rounded-lg cursor-pointer"
+          >
+             Publish Post
+          </Button>
+        </div>
       </div>
-
-      <div>
-        <label className="block text-gray-700 text-2xl mb-1">Content</label>
-        <Textarea
-          placeholder="Write your article here..."
-          rows={28}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="text-base px-4 py-3 resize-none"
-        />
-      </div>
-
-      <Button
-        onClick={handlePublish}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-base font-medium rounded-md cursor-pointer"
-      >
-        Publish
-      </Button>
     </div>
   );
 };
