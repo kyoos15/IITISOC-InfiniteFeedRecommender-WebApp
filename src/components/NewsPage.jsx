@@ -7,16 +7,13 @@ import { Button } from "@/components/ui/button";
 import { useEffect } from 'react';
 import { axiosInstance } from '../context/NewsContext';
 import { useParams } from 'react-router-dom';
-import { response } from 'express';
-
+/* eslint-disable */
 const NewsPage = () => {
 
     const { id } = useParams();
     const assetMongoDBId = id;
     const [foundedNews, setFoundedState] = useState({});
     useEffect(() => {
-        console.log("id: ", id);
-        
         const  findAssetById = async () => {
             const response = await axiosInstance.get(`/asset/getassetbyid/${assetMongoDBId}`);
             console.log("the response of newsPage is: ", response);
@@ -24,9 +21,11 @@ const NewsPage = () => {
         }
         findAssetById();
     }, []);
-    useEffect(() => {
-        console.log("The updated asset is:", foundedNews);
-    }, [foundedNews]);
+    useEffect(()=> {
+        if(foundedNews){
+            console.log("foundedNews: ", foundedNews);
+        }
+    }, [foundedNews])
 
     // remove this shit
     const blog = {
@@ -41,7 +40,9 @@ const NewsPage = () => {
         User: { username: "Harsh Anand" },
     };
 
-    const name = blog.User.username || "?";
+    const realBlog = foundedNews 
+
+    const name = blog.User.username || "?"; // need to change this shit see console log for foundedNews format
     const date = new Date(blog.createdAt);
     const formattedDate = `${date.toLocaleString('default', { month: 'short' })} ${date.getDate()}, ${date.getFullYear()}`;
 
@@ -49,6 +50,20 @@ const NewsPage = () => {
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const sessionIsFor = "User"; // add this in context api and fill this up 
+    const readerId = null // same here
+
+    // useEffect for liked Checking and initializing liked useState:
+    useEffect( ()=> {
+        if(foundedNews){
+            const likerArray = foundedNews.likes.likerArray;
+            setLikes(likerArray.length());
+            const pos = likerArray.findIndex(
+                (likeObj) => likeObj.userOrChannel.toString() === readerId
+            )
+            if(pos !== -1) setLiked(true);
+        }
+    }, [foundedNews])
 
     const handleAddComment = async () => {
         if (newComment.trim() === '') return; // return some toast etc here not just empty return;
@@ -67,23 +82,46 @@ const NewsPage = () => {
         setNewComment('');
 
         const commenterId = null // do something to fill this up.
-        const sessionIsFor = "User"; // add this in context api and fill this up 
         if(sessionIsFor == "User") {
-            const response = await axiosInstance.get(`/user/postcommentonasset/${commenterId}/${id}`);
+            const res = await axiosInstance.post(`/user/postcommentonasset/${commenterId}/${id}`, {
+                content: newComment
+            });
+            // user cant reply currently on a comment : todo
+            if(res.ok == false){
+                // some toast etc ..
+                return;
+            }
+            // some toast of success etc ....
+        }else {
+            const res = await axiosInstance.post(`/asset/comment`, {
+                channelId: commenterId,
+                assetId: id,
+                content: newComment
+            })
+            if(res.ok == false){
+                // some toast etc ..
+                return;
+            }
+            // some toast of success etc ....
         }
-        if(response.ok == false){
-            // some toast etc ..
-            return;
-        }
-        console.log("response on creating comment is: ", response);
-        // some toast etc ....
-
     };
 
-    const handleLike = () => {
+    const handleLike = async () => {
         if (!liked) {
             setLikes(likes + 1);
             setLiked(true);
+        } else {
+            setLikes(likes - 1);
+            setLiked(false);
+        }
+        if(sessionIsFor == "Channel") {
+            const channelId = null // do somthing here also.
+            const res = await axiosInstance.patch(`/asset/like/${id}/${channelId}`);
+            // similar toast etc
+        } else {
+            const userId = null // do somthing here also.
+            const res = await axiosInstance.patch(`/user/like/${id}/${userId}`);
+            // similar toast etc
         }
     };
 
@@ -96,6 +134,7 @@ const NewsPage = () => {
     };
 
     const toggleReplyField = (id) => {
+        // this is todo
         setComments(comments.map(comment =>
             comment.id === id ? { ...comment, replyOpen: !comment.replyOpen } : comment
         ));
