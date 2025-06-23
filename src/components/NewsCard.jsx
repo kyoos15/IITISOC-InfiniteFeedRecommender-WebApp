@@ -19,12 +19,12 @@ const getBackgroundColor = (sentiment) => {
   }
 };
 
-const NewsCard = ({ id, title, description, time, channel, sentiment, category }) => {
+const NewsCard = ({ _id, title, description, time, channel, sentiment, category }) => {
   const navigate = useNavigate();
 
   return (
     <div
-      onClick={() => navigate(`/news/${id}`)}
+      onClick={() => navigate(`/news/${_id}`)} 
       className={`rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full ${getBackgroundColor(sentiment)}`}
     >
       {/* Header: Avatar + Author */}
@@ -63,3 +63,4 @@ const NewsCard = ({ id, title, description, time, channel, sentiment, category }
 };
 
 export default NewsCard;
+
