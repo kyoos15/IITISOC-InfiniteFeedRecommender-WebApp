@@ -1,12 +1,62 @@
-# React + Vite
+# Infinite Feed Recommender — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend implementation of the **Infinite Feed Recommendation Web App**, developed as part of the IITISOC 2025 Project (Project Slot: PS-12). The goal is to provide users with a personalized, infinite scrolling content feed that intelligently recommends relevant articles, videos, or posts.
 
-Currently, two official plugins are available:
+## Project Objective
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The objective of this project is to solve the challenge users face in discovering engaging and relevant content from the vast information available online. Many platforms fail to deliver real-time personalization, leading to user disengagement. This app addresses that by using recommendation algorithms to keep the feed fresh, relevant, and tailored to each user's interests.
 
-## Expanding the ESLint configuration
+## Problem Statement
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Users often struggle to find engaging, relevant content amidst the vast amount of information online, leading to disengagement or wasted time on irrelevant material. Many content platforms fail to deliver personalized feeds that adapt in real-time or maintain user interest over extended sessions. This web app curates an infinite scroll feed with smart recommendations, ensuring content stays fresh, relevant, and aligned with user preferences.
+
+## Key Features
+
+### Core Features
+
+- **Infinite Scroll Feed**: Dynamically loads more content as the user scrolls, without needing to refresh the page.
+- **Recommendation System**: Suggests posts based on tags, categories, and basic user interaction.
+- **User Personalization**: Allows users to set their content interests which are then used to personalize the feed.
+- **Interaction Support**: Users can like, comment on, or view posts. These interactions contribute to improving the recommendation quality.
+- **Responsive Design**: Works well on both desktop and mobile devices with a clean and adaptable UI.
+
+### Optional / Upcoming Features
+
+- Advanced recommendation logic based on user behavior (e.g., time spent, interactions).
+- Offline caching of recently viewed content for seamless access without internet.
+- Social sharing of content to external platforms.
+- Creator dashboard for managing content from the channel side.
+- Firebase-based user accounts for multi-device preference syncing.
+
+## Tech Stack
+
+| Technology       | Purpose                               |
+|------------------|----------------------------------------|
+| React            | Component-based frontend framework     |
+| Tailwind CSS     | Utility-first CSS framework            |
+| React Router     | Client-side routing                    |
+| Axios            | HTTP client for API calls              |
+| React Hot Toast  | Toast notifications                    |
+| Heroicons        | Icons for user interface               |
+
+
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js and npm installed
+- Backend running locally at `http://localhost:4000` or update the base URL accordingly
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Kaal-09/IITISOC-InfiniteFeedRecommender-WebApp.git
+cd IITISOC-InfiniteFeedRecommender-WebApp
+
+
+npm install
+
+npm run dev
+
