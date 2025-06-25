@@ -7,12 +7,16 @@ import { Button } from "@/components/ui/button";
 import { useEffect } from 'react';
 import { axiosInstance } from '../context/NewsContext';
 import { useParams } from 'react-router-dom';
+import { editUserTaggsBasedOnHistory } from '../../../workerProcessesServer/Producer';
+import Channel from '../../../server/src/models/channel.model';
+import User from '../../../server/src/models/user.model';
 /* eslint-disable */
 const NewsPage = () => {
 
     const { id } = useParams();
     const assetMongoDBId = id;
     const [foundedNews, setFoundedState] = useState({});
+
     useEffect(() => {
         const  findAssetById = async () => {
             const response = await axiosInstance.get(`/asset/getassetbyid/${assetMongoDBId}`);
@@ -26,6 +30,20 @@ const NewsPage = () => {
             console.log("foundedNews: ", foundedNews);
         }
     }, [foundedNews])
+    // useEffect for bullMQ work just comment the below useEffect else insall docker and run redis on it plus some other little things;
+    useEffect(() => {
+        if(foundedNews){
+            const viewerId = null // do something here use useContext.
+            const viewerType = "User" // same
+
+            const doWork = async () => {
+                const res = await editUserTaggsBasedOnHistory({viewerId, viewerType, assetId: assetMongoDBId});
+                console.log("response from bullmq Queue after creating a job is: ", res);
+            }
+            doWork();
+        }
+    }, [foundedNews])
+    
 
     // remove this shit
     const blog = {
