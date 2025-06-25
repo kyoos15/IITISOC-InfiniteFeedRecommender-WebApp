@@ -16,6 +16,13 @@ const MyPosts = () => {
       date: 'June 15, 2025',
       category: 'Business'
     }
+    {
+      id: 3,
+      title: 'Working endlessly',
+      description: 'IT jobs working hours increase to 12hours a day in karnataka',
+      date: 'June 20, 2025',
+      category: 'tech'
+    }
   ];
 
   return (
