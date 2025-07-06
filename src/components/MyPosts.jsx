@@ -15,7 +15,7 @@ const MyPosts = () => {
       description: 'The startup ecosystem is growing rapidly in India.',
       date: 'June 15, 2025',
       category: 'Business'
-    }
+    },
     {
       id: 3,
       title: 'Working endlessly',
