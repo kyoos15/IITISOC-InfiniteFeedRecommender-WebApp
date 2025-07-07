@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       });
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.message || 'Login failed');
+      if (!res.ok) throw new Error(data.message || 'Invalid Credentials');
 
       setUser(data.user);
       setToken(data.token);
