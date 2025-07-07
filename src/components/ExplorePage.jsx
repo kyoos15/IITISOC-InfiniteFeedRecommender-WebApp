@@ -26,7 +26,7 @@ const ExplorePage = () => {
       title: 'Markets hit all-time high',
       description: 'Stocks surge amid tech rally.',
       category: 'Business',
-      time: '1d ago'
+      time: '1hr ago'
     }
   ];
 
