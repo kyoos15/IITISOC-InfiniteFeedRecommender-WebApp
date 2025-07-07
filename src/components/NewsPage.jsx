@@ -226,7 +226,7 @@ const NewsPage = () => {
 
                 <div className="space-y-6">
                     {comments.length === 0 ? (
-                        <p className="text-gray-500">No comments yet. Be the first!</p>
+                        <p className="text-gray-500">No comments yet. !</p>
                     ) : (
                         comments.map((comment) => (
                             <div key={comment.id} className="flex items-start space-x-4 pb-6 border-b border-gray-200">
