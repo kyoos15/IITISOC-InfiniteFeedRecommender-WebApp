@@ -45,7 +45,6 @@ Users often struggle to find engaging, relevant content amidst the vast amount o
 ### Prerequisites
 
 - Node.js and npm installed
-- Backend running locally at `http://localhost:4000` or update the base URL accordingly
 
 ### Installation
 
